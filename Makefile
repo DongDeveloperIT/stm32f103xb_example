@@ -13,7 +13,8 @@ OBJ_DIR := $(OUTPUT_DIR)/obj
 # List of all source files
 SRC_DIRS		+=  $(SRC_DIR) \
 			   		$(PROJECT_DIR)/Plugins/Base_$(AR_PKG_NAME)/src \
-			   		$(PROJECT_DIR)/Plugins/Port_$(AR_PKG_NAME)/src
+			   		$(PROJECT_DIR)/Plugins/Port_$(AR_PKG_NAME)/src \
+					$(SRC_DIR)/m3/gcc
 
 # List of all include files
 INCLUDE_DIRS	+= 	$(INCLUDE_DIR) \
@@ -34,7 +35,7 @@ SRC_FILES		+=  $(foreach dir, $(SRC_DIRS), $(wildcard $(dir)/*.c) ) \
 INCLUDE_FILES	+= $(foreach dir, $(INCLUDE_DIRS), $(wildcard $(dir)/*.h) )
 
 # The variable to store linker command file
-LINKER_FILE := $(PROJECT_DIR)/build_files/gcc/stm32f103c8tx_flash.ld
+LINKER_DEF := $(PROJECT_DIR)/build_files/gcc/stm32f103c8tx_flash.ld
 
 # The variable to store the object file
 OBJ_FILES := $(notdir $(patsubst %.c,%.o,$(patsubst %.s,%.o,$(patsubst %.S,%.o,$(SRC_FILES)))))
@@ -56,6 +57,8 @@ CC := $(GCC_DIR)/bin/arm-none-eabi-gcc.exe
 LD := $(GCC_DIR)/bin/arm-none-eabi-gcc.exe
 AS := $(GCC_DIR)/bin/arm-none-eabi-gcc.exe
 
+MAPFILE = $(OUTPUT_DIR)/stm32f103xb_example.map
+
 clib        := $(GCC_DIR)/arm-none-eabi/lib
 specs       := nano.specs \
                nosys.specs
@@ -71,18 +74,17 @@ CCOPT := -mcpu=cortex-m3 \
          $(foreach spec, $(specs), -specs=$(spec))
 
 # Assembler options
-ASOPT := -mcpu=cortex-m3 \
-         -mthumb \
-         -mfloat-abi=soft \
-         --sysroot="$(clib)" \
-         $(foreach spec, $(specs), -specs=$(spec))
+ASOPT := -c \
+		 -mthumb \
+	     -mcpu=cortex-m3 \
+		 -mfpu=fpv5-sp-d16 \
+		 -mfloat-abi=hard  \
+		 -x assembler-with-cpp
 # Linker options - FIXED
 LDOPT :=  --entry=Reset_Handler \
-		 -T "$(LINKER_FILE)" \
 		 -mcpu=cortex-m3 \
          -mthumb \
          -mfloat-abi=soft \
-         -Wl,-Map="$(OUTPUT_DIR)/stm32f103xb_example.map" \
          -Wl,--gc-sections \
          $(foreach spec, $(specs), -specs=$(spec)) \
          -Wl,--start-group -lm -lnosys -Wl,--end-group \
@@ -114,19 +116,19 @@ create_dir:
 
 %.o : %.s
 	@echo "Compiling $<"
-	@$(AS) $(ASOPT) $< -o $(OUTPUT_DIR)/$@
+	@$(AS) $(ASOPT) $< -o $(OUTPUT_DIR)/$@ $(DEP_FLAG)
 	@echo "Finish compiling"
 
 %.o : %.S
 	@echo "Compiling $<"
-	@$(AS) $(ASOPT)	$< -o $(OUTPUT_DIR)/$@
+	@$(AS) $(ASOPT)	$< -o $(OUTPUT_DIR)/$@ $(DEP_FLAG)
 	@echo "Finish compiling"
 
 # Linking all object files to create an executable file
 
-$(EXC_FILE) : $(OBJ_FILES)
+$(EXC_FILE) : $(OBJ_FILES) $(LINKER_DEF)
 	@echo "Linking"
-	@$(LD) $(LDOPT) $(OUTPUT_DIR)/*.o -o $(OUTPUT_DIR)/$@
+	@$(LD) -Wl,-Map,"$(MAPFILE)" $(LDOPT) -T $(LINKER_DEF) $(ODIR)/*.o -o $(ODIR)/$@
 	@echo "Finish linking"
 
 clean:
