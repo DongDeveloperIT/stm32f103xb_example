@@ -128,7 +128,7 @@ create_dir:
 
 $(EXC_FILE) : $(OBJ_FILES) $(LINKER_DEF)
 	@echo "Linking"
-	@$(LD) -Wl,-Map,"$(MAPFILE)" $(LDOPT) -T $(LINKER_DEF) $(ODIR)/*.o -o $(ODIR)/$@
+	@$(LD) -Wl,-Map,"$(MAPFILE)" $(LDOPT) -T $(LINKER_DEF) $(OUTPUT_DIR)/*.o -o $(OUTPUT_DIR)/$@
 	@echo "Finish linking"
 
 clean:
