@@ -4,147 +4,244 @@
 #include <stdint.h>
 
 /**
-@brief Unsigned 8 bit integer with range of 0 ..+255 (0x00..0xFF) -
-       8 bit
+* @brief Unsigned 8 bit integer with range of 0 ..+255 (0x00..0xFF) -
+*        8 bit
+* @implements uint8_type
 */
-typedef uint8 uint8_t;
+typedef unsigned char uint8;
 
 /**
-@brief Unsigned 16 bit integer with range of 0 ..+65535 (0x0000..0xFFFF) -
-       16 bit
+* @brief The standard AUTOSAR type boolean shall be implemented on basis of an eight bits long
+*        unsigned integer.
+* @implements boolean_type
 */
-typedef uint16 uint16_t;
+typedef uint8 boolean;
 
 /**
-@brief Unsigned 32 bit integer with range of 0 ..+4294967295 (0x00000000..0xFFFFFFFF) -
-       32 bit
+* @brief Unsigned 16 bit integer with range of 0 ..+65535 (0x0000..0xFFFF) -
+*        16 bit
+* @implements uint16_type
 */
-typedef uint32 uint32_t;
+typedef unsigned short uint16;
 
 /**
-@brief Unsigned 64 bit integer with range of 0 ..18446744073709551615 (0x0000000000000000..0xFFFFFFFFFFFFFFFF) -
-       64 bit
+* @brief Unsigned 32 bit integer with range of 0 ..+4294967295 (0x00000000..0xFFFFFFFF) -
+*        32 bit
+* @implements uint32_type
 */
-typedef uint64 uint64_t;
+typedef unsigned int uint32;
 
 /**
-@brief Signed 8 bit integer with range of -128 ..+127 (0x80..0x7F) -
-       7 bit + 1 sign bit
+* @brief Unsigned 64 bit integer with range of 0..18446744073709551615 (0x0000000000000000..0xFFFFFFFFFFFFFFFF)-
+*        64 bit
+*
 */
-typedef sint8 sint8_t;
+typedef unsigned long long uint64;
 
 /**
-@brief Signed 16 bit integer with range of -32768 ..+32767 (0x8000..0x7FFF) -
-       15 bit + 1 sign bit
+* @brief Signed 8 bit integer with range of -128 ..+127 (0x80..0x7F) -
+*        7 bit + 1 sign bit
+* @implements sint8_type
 */
-typedef sint16 sint16_t;
+typedef signed char sint8;
 
 /**
-@brief Signed 32 bit integer with range of -2147483648.. +2147483647 (0x80000000..0x7FFFFFFF) -
-       31 bit + 1 sign bit
+* @brief Signed 16 bit integer with range of -32768 ..+32767 (0x8000..0x7FFF) -
+*        15 bit + 1 sign bit
+* @implements sint16_type
 */
-typedef sint32 sint32_t;
+typedef signed short sint16;
 
 /**
-@brief Signed 64 bit integer with range of -9223372036854775808.. +9223372036854775807 (0x8000000000000000..0x7FFFFFFFFFFFFFFF) -
-       63 bit + 1 sign bit
+* @brief Signed 32 bit integer with range of -2147483648.. +2147483647 (0x80000000..0x7FFFFFFF) -
+*        31 bit + 1 sign bit
+* @implements sint32_type
 */
-typedef sint64 sint64_t;
+typedef signed int sint32;
+
 
 /**
-@brief Signed 8 bit integer with range of -128 ..+127 (0x80..0x7F) -
-       7 bit + 1 sign bit
+* @brief Signed 64 bit integer with range of -9223372036854775808..9223372036854775807 (0x8000000000000000..0x7FFFFFFFFFFFFFFF )-
+*        63 bit + 1 sign bit
+*
 */
-typedef sint8 int8_t;
+typedef signed long long sint64;
+
 
 /**
-@brief Signed 16 bit integer with range of -32768 ..+32767 (0x8000..0x7FFF) -
-       15 bit + 1 sign bit
+* @brief Unsigned integer at least 8 bit long. Range of at least 0 ..+255 (0x00..0xFF) -
+*        8 bit
+* @implements uint8_least_type
 */
-typedef sint16 int16_t;
+typedef unsigned char uint8_least;
 
 /**
-@brief Signed 32 bit integer with range of -2147483648.. +2147483647 (0x80000000..0x7FFFFFFF) -
-       31 bit + 1 sign bit
+* @brief  Unsigned integer at least 16 bit long. Range of at least 0 ..+65535 (0x0000..0xFFFF) -
+*         16 bit
+* @implements uint16_least_type
 */
-typedef sint32 int32_t;
+typedef unsigned short uint16_least;
 
 /**
-@brief Signed 64 bit integer with range of -9223372036854775808.. +9223372036854775807 (0x8000000000000000..0x7FFFFFFFFFFFFFFF) -
-       63 bit + 1 sign bit
+* @brief Unsigned integer at least 32 bit long. Range of at least 0 ..+4294967295
+*       (0x00000000..0xFFFFFFFF) - 32 bit
+* @implements uint32_least_type
 */
-typedef sint64 int64_t;
+typedef unsigned int uint32_least;
 
 /**
-@brief Unsigned integer at least 8 bit long. Range of at least 0 ..+255 (0x00..0xFF) -
-       8 bit
+* @brief Signed integer at least 8 bit long. Range - at least -128 ..+127.
+*        At least 7 bit + 1 bit sign
+* @implements sint8_least_type
 */
-typedef uint8_least uint8_least_t;
+typedef signed char sint8_least;
 
 /**
-@brief  Unsigned integer at least 16 bit long. Range of at least 0 ..+65535 (0x0000..0xFFFF) -
-        16 bit
+* @brief Signed integer at least 16 bit long. Range - at least -32768 ..+32767.
+*        At least 15 bit + 1 bit sign
+* @implements sint16_least_type
 */
-typedef uint16_least uint16_least_t;
+typedef signed short sint16_least;
 
 /**
-@brief Unsigned integer at least 32 bit long. Range of at least 0 ..+4294967295 (0x00000000..0xFFFFFFFF) -
-       32 bit
+* @brief Signed integer at least 32 bit long. Range - at least -2147483648.. +2147483647.
+*       At least 31 bit + 1 bit sign
+* @implements sint32_least_type
 */
-typedef uint32_least uint32_least_t;
+typedef signed int sint32_least;
 
 /**
-@brief Unsigned integer at least 64 bit long. Range of at least 0 ..18446744073709551615 (0x0000000000000000..0xFFFFFFFFFFFFFFFF) -
-       64 bit
+* @brief 32bit long floating point data type
+* @implements float32_type
 */
-typedef unsigned long long uint64_least_t;
+typedef float float32;
 
 /**
-@brief Signed integer at least 8 bit long. Range - at least -128 ..+127.
-       At least 7 bit + 1 bit sign
+* @brief 64bit long floating point data type
+* @implements float64_type
 */
-typedef sint8_least sint8_least_t;
+typedef double float64;
+
+
+#elif (CPU_TYPE == CPU_TYPE_32)
 
 /**
-@brief Signed integer at least 16 bit long. Range - at least -32768 ..+32767.
-       At least 15 bit + 1 bit sign
+* @brief Unsigned 8 bit integer with range of 0 ..+255 (0x00..0xFF) -
+*        8 bit
+* @implements uint8_type
 */
-typedef sint16_least sint16_least_t;
+typedef unsigned char uint8;
 
 /**
-@brief Signed integer at least 32 bit long. Range - at least -2147483648.. +2147483647.
-       At least 31 bit + 1 bit sign
+* @brief The standard AUTOSAR type boolean shall be implemented on basis of an eight bits long
+*        unsigned integer.
+* @implements boolean_type
 */
-typedef sint32_least sint32_least_t;
+typedef uint8 boolean;
+
 
 /**
-@brief Signed 64 bit integer with range of -9223372036854775808.. +9223372036854775807.
-       At least 63 bit + 1 bit sign
+* @brief Unsigned 16 bit integer with range of 0 ..+65535 (0x0000..0xFFFF) -
+*        16 bit
+* @implements uint16_type
 */
-typedef sint64 sint64_least_t;
+typedef unsigned short uint16;
 
 /**
-@brief Signed integer at least 8 bit long. Range - at least -128 ..+127.
-       At least 7 bit + 1 bit sign
+* @brief Unsigned 32 bit integer with range of 0 ..+4294967295 (0x00000000..0xFFFFFFFF) -
+*        32 bit
+* @implements uint32_type
 */
-typedef sint8_least int8_least_t;
+typedef unsigned long uint32;
 
 /**
-@brief Signed integer at least 16 bit long. Range - at least -32768 ..+32767.
-       At least 15 bit + 1 bit sign
+* @brief Unsigned 64 bit integer with range of 0..18446744073709551615 (0x0000000000000000..0xFFFFFFFFFFFFFFFF)-
+*        64 bit
+*
 */
-typedef sint16_least int16_least_t;
+typedef unsigned long long uint64;
+
 
 /**
-@brief Signed integer at least 32 bit long. Range - at least -2147483648.. +2147483647.
-       At least 31 bit + 1 bit sign
+* @brief Signed 8 bit integer with range of -128 ..+127 (0x80..0x7F) -
+*        7 bit + 1 sign bit
+* @implements sint8_type
 */
-typedef sint32_least int32_least_t;
+typedef signed char sint8;
 
 /**
-@brief Signed integer at least 64 bit long. Range - at least -9223372036854775808.. +9223372036854775807.
-       At least 63 bit + 1 bit sign
+* @brief Signed 16 bit integer with range of -32768 ..+32767 (0x8000..0x7FFF) -
+*        15 bit + 1 sign bit
+* @implements sint16_type
 */
-typedef sint64 int64_least_t;
+typedef signed short sint16;
+
+/**
+* @brief Signed 32 bit integer with range of -2147483648.. +2147483647 (0x80000000..0x7FFFFFFF) -
+*        31 bit + 1 sign bit
+* @implements sint32_type
+*/
+typedef signed long sint32;
+
+/**
+* @brief Signed 64 bit integer with range of -9223372036854775808..9223372036854775807 (0x8000000000000000..0x7FFFFFFFFFFFFFFF )-
+*        63 bit + 1 sign bit
+*
+*/
+typedef signed long long sint64;
+
+/**
+* @brief Unsigned integer at least 8 bit long. Range of at least 0 ..+255 (0x00..0xFF) -
+*        8 bit
+* @implements uint8_least_type
+*/
+typedef unsigned char uint8_least;
+
+/**
+* @brief  Unsigned integer at least 16 bit long. Range of at least 0 ..+65535 (0x0000..0xFFFF) -
+*         16 bit
+* @implements uint16_least_type
+*/
+typedef unsigned short uint16_least;
+
+/**
+* @brief Unsigned integer at least 32 bit long. Range of at least 0 ..+4294967295
+*       (0x00000000..0xFFFFFFFF) - 32 bit
+* @implements uint32_least_type
+*/
+typedef unsigned long uint32_least;
+
+/**
+* @brief Signed integer at least 8 bit long. Range - at least -128 ..+127.
+*        At least 7 bit + 1 bit sign
+* @implements sint8_least_type
+*/
+typedef signed char sint8_least;
+
+/**
+* @brief Signed integer at least 16 bit long. Range - at least -32768 ..+32767.
+*        At least 15 bit + 1 bit sign
+* @implements sint16_least_type
+*/
+typedef signed short sint16_least;
+
+/**
+* @brief Signed integer at least 32 bit long. Range - at least -2147483648.. +2147483647.
+*       At least 31 bit + 1 bit sign
+* @implements sint32_least_type
+*/
+typedef signed long sint32_least;
+
+/**
+* @brief 32bit long floating point data type
+* @implements float32_type
+*/
+typedef float float32;
+
+/**
+* @brief 64bit long floating point data type
+* @implements float64_type
+*/
+typedef double float64;
 
 #endif /* BASICTYPES_H */
